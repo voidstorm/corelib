@@ -99,12 +99,6 @@
 #endif
 #endif
 
-#ifdef SCHNARZMASCHINE_EXPORTS
-#define SCHNARZ_API __declspec(dllexport)
-#else
-#define SCHNARZ_API __declspec(dllimport)
-#endif
-
 
 #ifndef VT_PACK32
 #define VT_PACK32(h16, l16)	 (unsigned long)(((unsigned long)(h16) << 16) | (unsigned long)(l16)) 
