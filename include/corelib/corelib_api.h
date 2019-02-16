@@ -57,9 +57,9 @@
 } 
 
 #ifdef LOGGING_ON
-#define SYSTEM_LOG_INFO(x, ...) SystemLogger::get().info(x, ##__VA_ARGS__)
-#define SYSTEM_LOG_WARN(x, ...) SystemLogger::get().warn(x, ##__VA_ARGS__)
-#define SYSTEM_LOG_ERROR(x, ...) SystemLogger::get().error(x, ##__VA_ARGS__)
+#define SYSTEM_LOG_INFO(x, ...) scl::SystemLogger::get().info(x, ##__VA_ARGS__)
+#define SYSTEM_LOG_WARN(x, ...) scl::SystemLogger::get().warn(x, ##__VA_ARGS__)
+#define SYSTEM_LOG_ERROR(x, ...) scl::SystemLogger::get().error(x, ##__VA_ARGS__)
 #else 
 #define SYSTEM_LOG_INFO(x, ...)
 #define SYSTEM_LOG_WARN(x, ...)

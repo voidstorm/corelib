@@ -1,5 +1,5 @@
 #pragma once
-
+#include "corelib_api.h"
 #include <memory>
 #include <exception>
 #include <fstream>
@@ -13,7 +13,7 @@
 #include <ctime>
 
 
-namespace sm::app {
+namespace scl {
 
 enum class LogLevel : unsigned {
    LOG_INFO=0,

@@ -1,9 +1,10 @@
 #pragma once
 #include "logger.h"
 
+//scl = schnarzcorelib
+//sthread
 
-namespace sm::app {
-
+namespace scl {
 
 class SystemLogger {
 public:
