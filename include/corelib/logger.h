@@ -21,6 +21,33 @@ enum class LogLevel : unsigned {
    LOG_ERROR
 };
 
+
+auto date_str= []()->std::string {
+   std::stringstream ss;
+   auto time = std::chrono::system_clock::now();
+   auto time_c = std::chrono::system_clock::to_time_t(time);
+   struct tm newtime;
+   localtime_s(&newtime, &time_c);
+   ss << std::put_time(&newtime, "%F %T");
+   return ss.str();
+};
+
+auto info_str= []()->std::string {
+   return std::string(" [INFO] ");
+};
+
+auto warning_str = []()->std::string {
+   return std::string(" [WARNING] ");
+};
+
+auto error_str = []()->std::string {
+   return std::string(" [ERROR] ");
+};
+
+auto empty_str = []()->std::string {
+   return std::string();
+};
+
 class Logger {
 public:
    static const unsigned MAX_LINE_LEN = 2048;
@@ -41,19 +68,13 @@ public:
    }
 
    template<class... Args>
-   void log(LogLevel level, const std::string &msg, Args&&... args ) {
+   void log(LogLevel level, const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args ) {
       std::lock_guard<decltype(mMutex)> lock(mMutex);
       if (mLog.is_open()) {
          snprintf(mBuffer.data(), MAX_LINE_LEN, msg.c_str(), args...);
          {
             std::stringstream ss;
-            auto time = std::chrono::system_clock::now();
-            auto time_c = std::chrono::system_clock::to_time_t(time);
-            struct tm newtime;
-            localtime_s(&newtime, &time_c);
-            ss << std::put_time(&newtime, "%F %T")
-               << (level == LogLevel::LOG_INFO ? " [INFO] " : 
-                   level == LogLevel::LOG_WARNING ? " [WARNING] " : " [ERROR] ")
+            ss << annotation()
                << mBuffer.data()
                << std::endl;
             mLog << ss.str();
@@ -72,18 +93,18 @@ public:
    }
 
    template<class... Args>
-   void info(const std::string &msg, Args&&... args) {
-      log(LogLevel::LOG_INFO, msg, args...);
+   void info(const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args) {
+      log(LogLevel::LOG_INFO, annotation, msg, args...);
    }
 
    template<class... Args>
-   void warn(const std::string &msg, Args&&... args) {
-      log(LogLevel::LOG_WARNING, msg, args...);
+   void warn(const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args) {
+      log(LogLevel::LOG_WARNING, annotation, msg, args...);
    }
 
    template<class... Args>
-   void error(const std::string &msg, Args&&... args) {
-      log(LogLevel::LOG_ERROR, msg, args...);
+   void error(const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args) {
+      log(LogLevel::LOG_ERROR, annotation, msg, args...);
    }
 
 private:

@@ -7,14 +7,14 @@
 #include <optional>
 #include <variant>
 #include <array>
-#include "api.h"
+#include "corelib_api.h"
 #include "macro_util.hpp"
 //functional style stuff
 
 //curry/partial function application
 
 
-namespace sm
+namespace scl
 {
     template <typename C>
     struct get_template_type;
@@ -32,8 +32,7 @@ namespace sm
     }
 }
 
-namespace sm {
-
+namespace scl {
    
 template<typename Function, typename... Arguments>
 INLINE constexpr auto partial(Function &&func, Arguments&&... args) {

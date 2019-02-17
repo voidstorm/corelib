@@ -48,18 +48,10 @@
 #define VT_EXCEPT_RT(x, msg, e) throw x(std::string("Exception in file: ") + std::string(__FILE__) + std::string(" in line: ") + std::to_string(__LINE__) + std::string(" -> ") + std::string(msg) + std::string("\n") + e.what())
 
 
-#define VK_CHECK_RESULT(x) \
-{ \
-   const auto result = (x); \
-      if (result != VkResult::VK_SUCCESS) { \
-         SystemLogger::get().error("Failed to create instance with error: %s", VkErrorHelper::vkResultToStr(result).c_str()); \
-      } \
-} 
-
 #ifdef LOGGING_ON
-#define SYSTEM_LOG_INFO(x, ...) scl::SystemLogger::get().info(x, ##__VA_ARGS__)
-#define SYSTEM_LOG_WARN(x, ...) scl::SystemLogger::get().warn(x, ##__VA_ARGS__)
-#define SYSTEM_LOG_ERROR(x, ...) scl::SystemLogger::get().error(x, ##__VA_ARGS__)
+#define SYSTEM_LOG_INFO(x, ...) scl::SystemLogger::get().info([]()->auto{return scl::date_str() + scl::info_str();}, x, ##__VA_ARGS__)
+#define SYSTEM_LOG_WARN(x, ...) scl::SystemLogger::get().warn([]()->auto{return scl::date_str() + scl::warning_str();},x, ##__VA_ARGS__)
+#define SYSTEM_LOG_ERROR(x, ...) scl::SystemLogger::get().error([]()->auto{return scl::date_str() + scl::error_str();},x, ##__VA_ARGS__)
 #else 
 #define SYSTEM_LOG_INFO(x, ...)
 #define SYSTEM_LOG_WARN(x, ...)
@@ -84,9 +76,9 @@
 } 
 
 #ifdef LOGGING_ON
-#define SYSTEM_LOG_INFO(x, ...) SystemLogger::get().info(x, ##__VA_ARGS__)
-#define SYSTEM_LOG_WARN(x, ...) SystemLogger::get().warn(x, ##__VA_ARGS__)
-#define SYSTEM_LOG_ERROR(x, ...) SystemLogger::get().error(x, ##__VA_ARGS__)
+#define SYSTEM_LOG_INFO(x, ...) scl::SystemLogger::get().info([]()->auto{return scl::date_str() + scl::info_str();}, x, ##__VA_ARGS__)
+#define SYSTEM_LOG_WARN(x, ...) scl::SystemLogger::get().warn([]()->auto{return scl::date_str() + scl::warning_str();},x, ##__VA_ARGS__)
+#define SYSTEM_LOG_ERROR(x, ...) scl::SystemLogger::get().error([]()->auto{return scl::date_str() + scl::error_str();},x, ##__VA_ARGS__)
 #else 
 #define SYSTEM_LOG_INFO(x, ...)
 #define SYSTEM_LOG_WARN(x, ...)
