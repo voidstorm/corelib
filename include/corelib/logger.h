@@ -11,6 +11,8 @@
 #include <array>
 #include <iomanip>
 #include <ctime>
+#include <optional>
+
 
 
 namespace scl {
@@ -33,15 +35,15 @@ auto date_str= []()->std::string {
 };
 
 auto info_str= []()->std::string {
-   return std::string(" [INFO] ");
+   return std::string("[INFO] ");
 };
 
 auto warning_str = []()->std::string {
-   return std::string(" [WARNING] ");
+   return std::string("[WARNING] ");
 };
 
 auto error_str = []()->std::string {
-   return std::string(" [ERROR] ");
+   return std::string("[ERROR] ");
 };
 
 auto empty_str = []()->std::string {
@@ -68,13 +70,13 @@ public:
    }
 
    template<class... Args>
-   void log(LogLevel level, const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args ) {
+   void log(LogLevel level, const std::optional<std::function<std::string(void)>> &annotation, const std::string &msg, Args&&... args ) {
       std::lock_guard<decltype(mMutex)> lock(mMutex);
       if (mLog.is_open()) {
          snprintf(mBuffer.data(), MAX_LINE_LEN, msg.c_str(), args...);
          {
             std::stringstream ss;
-            ss << annotation()
+            ss << (annotation.has_value() ? annotation.value()() : "")
                << mBuffer.data()
                << std::endl;
             mLog << ss.str();
@@ -93,19 +95,25 @@ public:
    }
 
    template<class... Args>
-   void info(const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args) {
+   void info(const std::optional<std::function<std::string(void)>> &annotation, const std::string &msg, Args&&... args) {
       log(LogLevel::LOG_INFO, annotation, msg, args...);
    }
 
    template<class... Args>
-   void warn(const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args) {
+   void warn(const std::optional<std::function<std::string(void)>> &annotation, const std::string &msg, Args&&... args) {
       log(LogLevel::LOG_WARNING, annotation, msg, args...);
    }
 
    template<class... Args>
-   void error(const std::function<std::string(void)> &annotation, const std::string &msg, Args&&... args) {
+   void error(const std::optional<std::function<std::string(void)>> &annotation, const std::string &msg, Args&&... args) {
       log(LogLevel::LOG_ERROR, annotation, msg, args...);
    }
+
+   template<class... Args>
+   void print(const std::optional<std::function<std::string(void)>> &annotation, const std::string &msg, Args&&... args) {
+      log(LogLevel::LOG_INFO, annotation, msg, args...);
+   }
+
 
 private:
    std::array<char, MAX_LINE_LEN> mBuffer;
