@@ -3,7 +3,8 @@
 #include <type_traits>
 #include <cassert>
 #include <limits>
-#include "api.h"
+#include "corelib_api.h"
+#include "macro_util.hpp"
 
 #ifdef max 
 #undef max
@@ -41,7 +42,7 @@
 
 
 
-namespace sm {
+namespace scl {
 template<class T, size_t ALIGNMENT= 16, class Enable = void>
 class array final {
 
@@ -273,12 +274,12 @@ private:
 
 namespace std {
 template<class T>
-T* begin(const sm::array<typename T> &a) {
+T* begin(const scl::array<typename T> &a) {
    return a.begin();
 }
 
 template<class T>
-T* end(const sm::array<typename T> &a) {
+T* end(const scl::array<typename T> &a) {
    return a.end();
 }
 }
