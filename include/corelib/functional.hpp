@@ -41,7 +41,14 @@ INLINE constexpr void execute_opt(std::optional<T> &cmd, Ts&& ...args) {
       cmd.value()(std::forward<Ts>(args)...);
    }
 };
-   
+
+template<class T, class ... Ts>
+INLINE constexpr void execute_opt(std::optional<T> &&cmd, Ts&& ...args) {
+   if (cmd.has_value()) {
+      cmd.value()(std::forward<Ts>(args)...);
+   }
+};
+
 template<typename Function, typename... Arguments>
 INLINE constexpr auto partial(Function &&func, Arguments&&... args) {
    return [=](auto&&... rest) {
