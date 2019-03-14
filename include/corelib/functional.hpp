@@ -50,13 +50,13 @@ INLINE constexpr void execute_opt(std::optional<T> &&cmd, Ts&& ...args) {
 };
 
 template <typename Collection, typename Key>
-INLINE constexpr auto get_opt(Collection &col, const Key &key)->std::optional<typename Collection::mapped_type> {
+INLINE constexpr auto find_opt(Collection &col, const Key &key)->std::optional<typename Collection::mapped_type> {
    auto it = col.begin();
    return (it = col.find(key)) != col.end() ? std::make_optional((*it).second) : std::nullopt;
 }
 
 template <typename Collection, typename Key>
-INLINE constexpr auto get_opt(Collection &&col, Key &&key)->std::optional<typename Collection::mapped_type> {
+INLINE constexpr auto find_opt(Collection &&col, Key &&key)->std::optional<typename Collection::mapped_type> {
    auto it = col.begin();
    return (it = col.find(key)) != col.end() ? std::make_optional((*it).second) : std::nullopt;
 }
