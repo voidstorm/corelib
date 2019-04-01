@@ -124,3 +124,26 @@
 
 
 #define VT_TIMING
+
+
+#define CACHE_LINE_SIZE std::hardware_destructive_interference_size  
+#define CACHE_ALIGN __declspec(align(CACHE_LINE_SIZE))
+
+//// every object of type sse_t will be aligned to 16-byte boundary
+//struct alignas(16) sse_t {
+//   float sse_data[4];
+//};
+//
+//// the array "cacheline" will be aligned to 64-byte boundary
+//alignas(CACHE_LINE_SIZE) char cacheline[CACHE_LINE_SIZE];
+
+
+
+//False & True Sharing in C++
+//
+//Remember the remark about false sharing.As of C++17, two interesting compile time constants are added to the thread support library[^ 5].
+//
+//hardware_destructive_interference_size: the minimum offset between two objects to avoid false sharing.This value can be used as an argument to alignas to keep two fields of a struct apart.
+//   hardware_constructive_interference_size : the maximum size of contiguous memory to promote true sharing.
+//
+//   Basically, these constants provide a portable way to access the L1 data cache line size from C++.
