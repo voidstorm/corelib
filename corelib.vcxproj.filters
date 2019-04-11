@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{488ae3fe-d188-4975-91f5-b1d1f64c3dd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\corelib\array.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\command_queue.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\corelib_api.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\functional.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\logger.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\macro_util.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\scoped_timer.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\scoped_wait_timer.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\shared_string_view.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\system_logger.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\corelib\thread_context.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
