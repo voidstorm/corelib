@@ -24,7 +24,7 @@ enum class LogLevel : unsigned {
 };
 
 
-auto date_str= []()->std::string {
+inline auto date_str= []()->std::string {
    std::stringstream ss;
    auto time = std::chrono::system_clock::now();
    auto time_c = std::chrono::system_clock::to_time_t(time);
@@ -34,19 +34,19 @@ auto date_str= []()->std::string {
    return ss.str();
 };
 
-auto info_str= []()->std::string {
+inline auto info_str= []()->std::string {
    return std::string("[INFO] ");
 };
 
-auto warning_str = []()->std::string {
+inline auto warning_str = []()->std::string {
    return std::string("[WARNING] ");
 };
 
-auto error_str = []()->std::string {
+inline auto error_str = []()->std::string {
    return std::string("[ERROR] ");
 };
 
-auto empty_str = []()->std::string {
+inline auto empty_str = []()->std::string {
    return std::string();
 };
 
