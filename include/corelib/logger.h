@@ -50,7 +50,7 @@ auto empty_str = []()->std::string {
    return std::string();
 };
 
-class Logger {
+class Logger final {
 public:
    static const unsigned MAX_LINE_LEN = 2048;
 
@@ -65,6 +65,12 @@ public:
       }
    }
    
+   Logger(const Logger&) = delete;
+   Logger(Logger&&) = delete;
+   Logger& operator=(const Logger&) = delete;
+   Logger& operator=(Logger&&) = delete;
+
+
    ~Logger() {
       mLog.close();
    }
