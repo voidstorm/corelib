@@ -58,11 +58,11 @@ public:
       mStreamToStdOut(streamToStdOut),
       mBreakOnWarn(breakOnWarn),
       mBreakOnError(breakOnError){
-      try {
-         mLog.open(logfile, std::ofstream::out | std::ofstream::trunc);
-      } catch (const std::exception&) {
+      mLog.open(logfile, std::ofstream::out | std::ofstream::trunc);
+      if (mLog.fail()) {
          V(std::string("Failed to open log file: ") + logfile);
-      }      
+         mLog.close();
+      }
    }
    
    ~Logger() {
