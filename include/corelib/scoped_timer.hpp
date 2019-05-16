@@ -2,7 +2,7 @@
 #include <chrono>
 #include <functional>
 
-namespace sm::time {
+namespace scl {
 
 using fmilliseconds = std::chrono::duration<float, std::milli>;
 using dmilliseconds = std::chrono::duration<double, std::milli>;

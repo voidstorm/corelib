@@ -126,7 +126,9 @@
 #define VT_TIMING
 
 
-#define CACHE_LINE_SIZE std::hardware_destructive_interference_size  
+#define CACHE_LINE_SIZE std::hardware_destructive_interference_size
+#define SSE_SIZE std::hardware_destructive_interference_size
+
 #define CACHE_ALIGN __declspec(align(CACHE_LINE_SIZE))
 
 //// every object of type sse_t will be aligned to 16-byte boundary
