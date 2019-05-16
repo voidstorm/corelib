@@ -79,3 +79,41 @@ void set(const ARG &value) { \
       return sm::fn::runtime_get(m_private_members, i); \
    } \
 
+// a really helpful tuple iterator, credits go to: https://foonathan.net/blog/2017/03/01/tuple-iterator.html and
+// https://github.com/arnemertz/blog-code/blob/master/2017-03-tuple-iterator/tuple_iterator.h
+
+//class TestClass final {
+//public:
+//   TestClass() = default;
+//   ~TestClass() = default;
+//
+//   SM_DECLARE_PRIVATE_GETTER()
+//      SM_DECLARE_PRIVATE_SETTER()
+//      SM_DECLARE_PRIVATE_MEMBER_ITER()
+//#define PRIVATES(MEMBER) \
+//        MEMBER(int,m_count,1), \
+//        MEMBER(const bool,m_use,true), \
+//        MEMBER(std::string,m_name,"bla")
+//      SM_DECLARE_PRIVATE_MEMBERS_WITHFLAG(PRIVATES)
+//};
+//
+//
+//using MyClass = std::tuple<std::tuple<bool, int>, std::tuple<bool, std::string>, std::tuple<bool, double>>;
+//TestClass t;
+//t.set<TestClass::m_name>("huhu");
+
+//std::cout << t.get<TestClass::m_name>() << std::endl;
+
+//auto[a, b] = t.get<TestClass::m_name>();
+//
+//MyClass tup{ std::make_tuple(false,1), std::make_tuple(false,"bla"), std::make_tuple(false,1.34) };
+//
+//
+//auto print_elem = sm::fn::overload_unref{
+//   [](int i) { std::cout << "int: " << i << '\n'; },
+//   [](std::string& s) { std::cout << "string: " << s << '\n'; s = "helo"; },
+//   [](double d) { std::cout << "double: " << d << '\n'; },
+//   [](bool b) { std::cout << "bool: " << b << '\n'; }
+//};
+//
+//auto range = sm::fn::to_range(tup);
