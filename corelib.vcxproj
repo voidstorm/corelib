@@ -25,6 +25,7 @@
     <ClInclude Include="include\corelib\functional.hpp" />
     <ClInclude Include="include\corelib\logger.h" />
     <ClInclude Include="include\corelib\macro_util.hpp" />
+    <ClInclude Include="include\corelib\buffer_view.hpp" />
     <ClInclude Include="include\corelib\scoped_timer.hpp" />
     <ClInclude Include="include\corelib\scoped_wait_timer.hpp" />
     <ClInclude Include="include\corelib\shared_string_view.hpp" />

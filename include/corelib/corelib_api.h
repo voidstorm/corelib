@@ -67,13 +67,13 @@
 #define VT_EXCEPT_RT(x, msg, e) throw x(std::string("Exception in file: ") + std::string(__FILE__) + std::string(" in line: ") + std::to_string(__LINE__) + std::string(" -> ") + std::string(msg) + std::string("\n") + e.what())
 
 
-#define VK_CHECK_RESULT(x) \
-{ \
-   auto result = (x); \
-      if (result != VkResult::VK_SUCCESS) { \
-         SystemLogger::get().error("Failed to create instance with error: %s", VkErrorHelper::vkResultToStr(result).c_str()); \
-      } \
-} 
+//#define VK_CHECK_RESULT(x) \
+//{ \
+//   auto result = (x); \
+//      if (result != VkResult::VK_SUCCESS) { \
+//         SystemLogger::get().error("Failed to create instance with error: %s", VkErrorHelper::vkResultToStr(result).c_str()); \
+//      } \
+//} 
 
 #ifdef LOGGING_ON
 #define SYSTEM_LOG_INFO(x, ...) scl::SystemLogger::get().info([]()->auto{return scl::date_str() + scl::info_str();}, x, ##__VA_ARGS__)

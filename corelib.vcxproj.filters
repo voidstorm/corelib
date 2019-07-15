@@ -39,5 +39,8 @@
     <ClInclude Include="include\corelib\thread_context.hpp">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="include\corelib\buffer_view.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
